@@ -4,7 +4,12 @@ include_once 'header.php'//Including the header file.
 <section class="main-container">
 	<div class="main-wrapper">
 		<h2>Home</h2>
-	</div>
+<?php
+if (isset($_SESSION['u_id'])) {
+	echo "You are logged in.";
+}
+?>
+</div>
 </section>
 
 <?php
