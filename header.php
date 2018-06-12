@@ -18,7 +18,7 @@ session_start();
 		</div>
 		<div class="nav-login">
 <?php
-if (isset($_SESSION['u_id'])) {/*If usere is logged in, this 'Logout' button is provided to them due to the global $_SESSION variable is set, hence the user is logged in.*/
+if (isset($_SESSION['u_id'])) {/*If user is logged in, this 'Logout' button is provided to them due to the global $_SESSION variable is set, hence the user is logged in.*/
 	echo '<form action="includes/logout.inc.php" method="POST">
 			<button type="submit" name="submit">Logout</button>
 		</form>';

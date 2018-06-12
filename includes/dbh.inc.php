@@ -13,10 +13,10 @@ class Dbh {
 
 	public function connect() {
 		/*Variable here are still assigned from the constants.php file*/
-		$this->servername = $dbServername;
-		$this->username   = $dbUsername;
-		$this->password   = $dbPassword;
-		$this->dbname     = $dbName;
+		$this->servername = DB_SERVERNAME;
+		$this->username   = DB_USERNAME;
+		$this->password   = DB_PASSWORD;
+		$this->dbname     = DB_NAME;
 		$this->charset    = "utf8mb4";
 
 		try {
