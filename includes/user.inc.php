@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * This class had all attribute fields for storing a user in the database. Inherits from the Dbh class for db connections/handlers.
+ */
 class User extends Dbh {
 
 	//Class properties
@@ -9,14 +11,16 @@ class User extends Dbh {
 	private $uid;
 	private $pwd;
 
+	/* Disregarding for now till I can find a workaround for only a few vars
 	//Constructor
 	public function __construct($first, $last, $email, $uid, $pwd) {
-		$this->first = $first;
-		$this->last  = $last;
-		$this->email = $email;
-		$this->uid   = $uid;
-		$this->pwd   = password_hash($pwd, PASSWORD_DEFAULT);//Go ahead and hash the password
+	$this->first = $first;
+	$this->last  = $last;
+	$this->email = $email;
+	$this->uid   = $uid;
+	$this->pwd   = password_hash($pwd, PASSWORD_DEFAULT);//Go ahead and hash the password
 	}
+	 */
 	//Getters and Setters
 	public function setFirst($first) {
 		$this->first = $first;
@@ -60,7 +64,7 @@ class User extends Dbh {
 	}
 
 	public function checkExistingUser() {
-		/*Verifying the user doesn't already exist (aka user_uid in the db table.*/
+		/*Checking for existing user doesn't already exist (aka user_uid in the db table.*/
 		try {
 			$existingUserQuerySQL = "SELECT COUNT(user_uid) FROM users WHERE user_uid = :uid;";
 			$stmtQuery            = $this->connect()->prepare($existingUserQuerySQL);
@@ -77,6 +81,27 @@ class User extends Dbh {
 
 	}
 
+	public function verifyUser() {
+		/*Checking credentials for user_uid on a match for both email and user_uid field*/
+		$veriySQL = "SELECT COUNT(*) FROM users WHERE user_uid = :uid OR user_email = :uid;";
+		$stmt     = $this->connect()->prepare($veriySQL);
+		$stmt->execute(['uid' => $this->uid, 'uid' => $this->uid]);
+		$rows = $stmt->fetchColumn();
+		if ($rows > 0) {
+			return true;
+		} else {
+			return false;
+		}
+		/*
+	$sql         = "SELECT * FROM users WHERE user_uid = '$uid' OR user_email = '$uid';";
+	$result      = mysqli_query($conn, $sql);
+	$resultCheck = mysqli_num_rows($result);// Any rows returned?
+	 */
+	}
+
+	public function verifyPassword() {
+		# code...
+	}
 }
 
 /*

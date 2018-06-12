@@ -10,7 +10,13 @@ if (isset($_POST['submit'])) {// Verifies user clicked sign up button
 	$uid   = $_POST['uid'];
 	$pwd   = $_POST['pwd'];
 
-	$user = new User($first, $last, $email, $uid, $pwd);
+	//$user = new User($first, $last, $email, $uid, $pwd);
+	$user = new User;
+	$user->setFirst($first);
+	$user->setLast($last);
+	$user->setEmail($email);
+	$user->setUid($uid);
+	$user->setPwd($pwd);
 
 	/*
 	//From original site

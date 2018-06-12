@@ -4,20 +4,35 @@ session_start();//Must start the session due to using global var below
 
 if (isset($_POST['submit'])) {
 	include 'dbh.inc.php';
+	include 'user.inc.php';
 
+	$uid = $_POST['uid'];
+	$pwd = $_POST['pwd'];
+
+	$user = new User();
+	$user->setUid($uid);
+	$user->setPwd($pwd);
+
+	/* old
 	$uid = mysqli_real_escape_string($conn, $_POST['uid']);
 	$pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
+	 */
 
 	//Error handlers
 	//Check if inputs are empty
-	if (empty($uid) || empty($pwd)) {
+	//if (empty($uid) || empty($pwd)) /*from original*/
+	if (empty($user->getUid()) || empty($user->getPwd())) {
 		header("Location: ../index.php?login=empty");/* Sending them back*/
 		exit();
 	} else {
+		/*
 		$sql         = "SELECT * FROM users WHERE user_uid = '$uid' OR user_email = '$uid';";
 		$result      = mysqli_query($conn, $sql);
 		$resultCheck = mysqli_num_rows($result);// Any rows returned?
-		if ($resultCheck < 1) {
+		 */
+		$resultCheck = $user->verifyUser();
+		//if ($resultCheck < 1) {
+		if ($resultCheck == true) {
 			header("Location: ../index.php?login=error");/* Sending them back*/
 			exit();
 		} else {

@@ -22,7 +22,7 @@ if (isset($_SESSION['u_id'])) {/*If user is logged in, this 'Logout' button is p
 	echo '<form action="includes/logout.inc.php" method="POST">
 			<button type="submit" name="submit">Logout</button>
 		</form>';
-} else {/*If the global $_SESSION variable is not set, the user is not logged in so they are only proveded and shown the Login button here. */
+} else {/*If the global $_SESSION variable is not set, the user is not logged in so they are only provided and shown the Login button here. */
 	echo '<form action="includes/login.inc.php" method="POST">
 				<input type="text" name="uid" placeholder="Username/e-mail">
 				<input type="password" name="pwd" placeholder="password">
